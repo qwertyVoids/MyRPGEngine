@@ -15,4 +15,3 @@ function DamageService.apply(target, damage, tags)
 end
 
 return DamageService
-

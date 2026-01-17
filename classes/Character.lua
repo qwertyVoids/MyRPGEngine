@@ -1,16 +1,19 @@
+local DamageService = require("services.DamageService")
+local HealService = require("services.HealService")
+
 local Character = {}
 Character.__index = Character
 
 function Character.new(name, class)
     local self = setmetatable({
-        Name = name,
-        Class = class,
-        Health = 200,
-        MaxHealth = 200,
-        Mana = 150,
-        MaxMana = 150,
-        Modifiers = {}
     }, Character)
+    self._data.Name = name
+    self._data.Class = class
+    self._data.Health = 200
+    self._data.MaxHealth = 200
+    self._data.Mana = 150
+    self._data.MaxMana = 150
+    self._data.Modifiers = {}
 
     return self
 end
