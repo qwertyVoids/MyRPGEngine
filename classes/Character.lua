@@ -13,6 +13,9 @@ function Character.new(name, class)
     self._data.MaxHealth = 200
     self._data.Mana = 150
     self._data.MaxMana = 150
+    self._data.FistDamage = 8
+    self._data.Money = 0
+    self._data.Quests = {}
     self._data.Modifiers = {}
 
     return self
