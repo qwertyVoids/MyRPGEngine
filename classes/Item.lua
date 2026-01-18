@@ -2,7 +2,7 @@ local Item = {}
 Item.__index = Item
 
 local function getItem(category, type, grade)
-    local path = "items" .. "." .. category:lower() .. "." .. type:lower() .. "_" .. grade:lower()
+    local path = "items" .. "." .. category:lower() .. "s." .. type .. "_" .. grade
     local success, item = pcall(require, path)
     return (success) and item or nil
 end

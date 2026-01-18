@@ -10,7 +10,7 @@ function HealService.apply(target, healAmount, tags)
     target:TriggerEvent("OnHeal", event)
 
     if not event.isBlocked then
-        target:TakeDamage(event.amount)
+        target:Heal(event.amount)
     end
 end
 
