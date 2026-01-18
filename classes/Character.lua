@@ -21,6 +21,21 @@ function Character.new(name, class)
     return self
 end
 
+function Character:GetStat(statName)
+    local stat = self._data[statName]
+    if stat then
+        return stat
+    end
+end
+
+function Character:ShowStats()
+    local name = "Имя: " .. self._data.Name .. ";\n"
+    local class = "Класс: " .. self._data.Class .. ";\n"
+    local health = "Здоровье: " .. self._data.Health .. ";\n"
+    local maxHealth = "Максимальное здоровье: " .. self._data.MaxHealth .. ";"
+    print(name .. class .. health .. maxHealth)
+end
+
 function Character:TriggerEvent(eventName, eventData)
     for _, mod in ipairs(self._data.Modifiers) do
         if mod[eventName] then
@@ -38,19 +53,13 @@ function Character:TakeDamage(amount)
 end
 
 function Character:Heal(amount)
-    if self._data.Health > 0 and self._data.Health < self._data.MaxHealth then
+    if self._data.Health < self._data.MaxHealth then
         self._data.Health = math.min(self._data.Health + amount, self._data.MaxHealth)
-    elseif true then
-        print("Не удалось восстановить здоровье! Игрок либо уже умер, либо у него уже максимальное здоровье.")
+    elseif self._data.Health <= 0 then
+        print("Здоровье не изменилось. Игрок мёртв.")
+    elseif self._data.Health >= self._data.MaxHealth then
+        print("Здоровье не изменилось. У игрока полное здоровье.")
     end
-end
-
-function Character:showStats()
-    local name = "Имя: " .. self._data.Name .. ";\n"
-    local class = "Класс: " .. self._data.Class .. ";\n"
-    local health = "Здоровье: " .. self._data.Health .. ";\n"
-    local maxHealth = "Максимальное здоровье: " .. self._data.MaxHealth .. ";"
-    print(name .. class .. health .. maxHealth)
 end
 
 return Character
