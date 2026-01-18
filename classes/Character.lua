@@ -24,7 +24,7 @@ end
 function Character:GetStat(statName)
     local stat = self._data[statName]
     if stat then
-        return stat
+        return tostring(stat)
     end
 end
 
