@@ -5,8 +5,7 @@ local Character = {}
 Character.__index = Character
 
 function Character.new(name, class)
-    local self = setmetatable({
-    }, Character)
+    local self = setmetatable({_data = {}}, Character)
     self._data.Name = name
     self._data.Class = class
     self._data.Health = 200
@@ -22,10 +21,7 @@ function Character.new(name, class)
 end
 
 function Character:GetStat(statName)
-    local stat = self._data[statName]
-    if stat then
-        return tostring(stat)
-    end
+    return self._data[statName]
 end
 
 function Character:ShowStats()
@@ -59,6 +55,19 @@ function Character:Heal(amount)
         print("Здоровье не изменилось. Игрок мёртв.")
     elseif self._data.Health >= self._data.MaxHealth then
         print("Здоровье не изменилось. У игрока полное здоровье.")
+    end
+end
+
+function Character:UseItem(item)
+    local data = item:GetData()
+    local services = {
+        Heal = HealService,
+        Damage = DamageService
+    }
+
+    local service = services[data.Action]
+    if service then
+        service.apply(self, data.Value, item:GetTags())
     end
 end
 

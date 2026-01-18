@@ -1,9 +1,11 @@
 return {
     Name = "Малое зелье восстановления",
     Description = "❤ Восстанавливает здоровье игроку.",
-    Type = "Potion",
-    Potion = "HealthPotion",
-    PotionType = "Small",
+    Category = "Potion",
+    ItemType = "HealthPotion",
+    Grade = "Small",
+    Value = 15,
+    IsPositive = true,
     Action = "Heal",
-    Element = "Holy"
+    Tags = { SourceType = "Potion", Element = "Holy" }
 }
