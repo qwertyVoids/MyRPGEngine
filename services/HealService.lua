@@ -1,7 +1,7 @@
 local HealService = {}
 
 function HealService.apply(target, healAmount, tags)
-    if type(target) ~= "table" and type(healAmount) ~= "number" then
+    if (type(target) ~= "table" or not target.TriggerEvent) and type(healAmount) ~= "number" and (not tags and type(tags) ~= "table") then
         print("HealService: Ошибка в приведённых аргументах.")
         return
     end

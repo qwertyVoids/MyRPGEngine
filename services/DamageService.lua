@@ -1,7 +1,7 @@
 local DamageService = {}
 
 function DamageService.apply(target, damage, tags)
-    if type(target) ~= "table" and type(damage) ~= "number" then
+    if (type(target) ~= "table" or not target.TriggerEvent) and type(damage) ~= "number" and (not tags and type(tags) ~= "table") then
         print("DamageService: Ошибка в приведённых аргументах.")
         return
     end

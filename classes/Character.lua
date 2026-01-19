@@ -59,6 +59,11 @@ function Character:Heal(amount)
 end
 
 function Character:UseItem(item)
+    if type(item) ~= "table" or not item.GetData then
+        print("Ошибка при использовании предмета: Укажите экземпляр класса Item.")
+        return
+    end
+
     local data = item:GetData()
     local services = {
         Heal = HealService,

@@ -3,7 +3,7 @@ local DamageService = require("services.DamageService")
 local CharacterFactory = require("factories.CharacterFactory")
 local Item = require("classes.Item")
 
-local Void = CharacterFactory.apply("Войд", "Paladin")
+local Void = CharacterFactory.apply("Войд", "Alchemist")
 
 local heal = Item.new("Potion", "HealthPotion", "Small")
 
