@@ -23,7 +23,7 @@ function Character.new(name, class)
                 if owner.Health <= 0 then
                     print("Игрок умер! Лечение тут не поможет.")
                     event.isBlocked = true
-                elseif owner.Health >= owner.MaxHealth>
+                elseif owner.Health >= owner.MaxHealth then
                     print("У игрока максимальное здоровье.")
                     event.isBlocked = true
                 end
