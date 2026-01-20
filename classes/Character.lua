@@ -58,8 +58,11 @@ function Character:ShowStats()
 end
 
 function Character:TriggerEvent(eventName, eventData)
+    eventData = eventData or {}
+    local eventLevel = (eventData.tags and eventData.tags.Level) or 1
     for _, mod in ipairs(self._data.Modifiers) do
-        if mod[eventName] then
+        local modLevel = (mod.level or mod.lvl) or 1
+        if mod[eventName] and eventLevel <= modLevel then
             mod[eventName](mod, eventData or {}, self)
         end
     end
@@ -67,7 +70,7 @@ end
 
 function Character:TakeDamage(amount)
     self._data.Health = math.max(self._data.Health - amount, 0)
-    if self._data.Health <= 0 then
+    if self._data.Health <= 0 and not self:HasModifier("Death") then
         table.insert(self._data.Modifiers, {
             name = "Death",
             OnIncomingDamage = function(mod, event, owner)
