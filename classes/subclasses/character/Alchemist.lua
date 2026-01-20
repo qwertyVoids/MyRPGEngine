@@ -17,11 +17,7 @@ function Alchemist.new(name)
                     print("Алхимик " .. owner.Name .. " выпил зелье и сработало его мастерство!")
                 end
             end
-        end
-    })
-    table.insert(self._data.Modifiers, {
-        name = "AlchemistMastery",
-        mult = 2,
+        end,
         OnStatCalculate = function(mod, event, owner)
             owner = owner._data
             if next(event.tags) ~= nil then
