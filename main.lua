@@ -1,51 +1,27 @@
-local CharacterFactory = require("factories.CharacterFactory")
-local DamageService = require("services.DamageService")
-
-local Player = CharacterFactory.apply("Void", "Alchemist")
-local visualHp = 0
-
-function love.load()
-    -- Инициализируем визуальное ХП
-    visualHp = Player:GetStat("Health")
-end
-
-function love.update(dt)
-    -- Получаем АКТУАЛЬНОЕ значение из твоего объекта
-    local currentHp = Player:GetStat("Health")
-    
-    -- Интерполяция (плавное движение visual к current)
-    if math.abs(visualHp - currentHp) > 0.1 then
-        visualHp = visualHp + (currentHp - visualHp) * 8 * dt
-    else
-        visualHp = currentHp
-    end
-end
-
 function love.draw()
-    local hp = Player:GetStat("Health")
-    local maxHp = Player:GetStat("MaxHealth")
+    local sw = love.graphics.getWidth()
+    local sh = love.graphics.getHeight()
     
-    -- Рисуем полоску
-    love.graphics.setColor(0.1, 0.1, 0.1)
-    love.graphics.rectangle("fill", 50, 100, 300, 30) -- Фон
-    
-    love.graphics.setColor(1, 0.2, 0.2)
-    love.graphics.rectangle("fill", 50, 100, 300 * (visualHp / maxHp), 30) -- Плавная полоска
-    
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.rectangle("line", 50, 100, 300, 30) -- Рамка
-    
-    -- Текст для проверки
-    love.graphics.print("Real HP: " .. hp, 50, 80)
-    love.graphics.print("Visual HP: " .. math.floor(visualHp), 50, 140)
-    love.graphics.print("Tap anywhere to HIT", 50, 180)
-end
+    -- Размер кнопок (пусть будет 10% от ширины экрана для адаптивности)
+    local radius = sw * 0.05 
 
--- На телефонах иногда лучше работает touchpressed, 
--- но LÖVE обычно транслирует тапы в mousepressed. 
--- Давай пропишем оба для надежности.
+    -- КНОПКА №1 (Справа внизу)
+    -- Правый отступ 25%: sw * 0.75
+    -- Нижний отступ 5%: sh * 0.95 (отнимаем от низа 5%)
+    local b1x = sw * 0.75
+    local b1y = sh * 0.95 - radius -- Вычитаем радиус, чтобы центр был выше края
+    
+    love.graphics.setColor(1, 0, 0) -- Красная
+    love.graphics.circle("fill", b1x, b1y, radius)
 
-function love.mousepressed(x, y, button)
-    -- Прямое воздействие через твой сервис
-    DamageService.apply(Player, 20, { SourceType = "Test" })
+    -- КНОПКА №2 (Выше и правее)
+    -- Правый отступ 15%: sw * 0.85
+    -- Нижний отступ 15%: sh * 0.85
+    local b2x = sw * 0.85
+    local b2y = sh * 0.85 - radius
+    
+    love.graphics.setColor(0, 1, 0) -- Зеленая
+    love.graphics.circle("fill", b2x, b2y, radius)
+    
+    love.graphics.setColor(1, 1, 1) -- Сброс цвета в белый
 end
