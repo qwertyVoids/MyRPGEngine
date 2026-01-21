@@ -58,12 +58,12 @@ function Character:ShowStats()
 end
 
 function Character:TriggerEvent(eventName, eventData)
-    eventData = eventData or {}
+    eventData = (type(eventData) == "table") or {}
     local eventLevel = (eventData.tags and eventData.tags.Level) or 1
     for _, mod in ipairs(self._data.Modifiers) do
         local modLevel = (mod.level or mod.lvl) or 1
         if mod[eventName] and eventLevel <= modLevel then
-            mod[eventName](mod, eventData or {}, self)
+            mod[eventName](mod, eventData, self)
         end
     end
 end
