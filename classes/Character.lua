@@ -35,7 +35,7 @@ function Character.new(name, class)
 end
 
 function Character:GetStat(statName)
-    return self._data[statName]
+    return (type(self._data[statName]) ~= "table") and self._data[statName] or nil
 end
 
 function Character:HasModifier(modName)
@@ -58,7 +58,7 @@ function Character:ShowStats()
 end
 
 function Character:TriggerEvent(eventName, eventData)
-    eventData = (type(eventData) == "table") or {}
+    eventData = (type(eventData) == "table") and eventData or {}
     local eventLevel = (eventData.tags and eventData.tags.Level) or 1
     for _, mod in ipairs(self._data.Modifiers) do
         local modLevel = (mod.level or mod.lvl) or 1
