@@ -10,20 +10,20 @@ function Alchemist.new(name)
         name = "AlchemistMastery",
         mult = 2,
         OnHeal = function(mod, event, owner)
-            owner = owner._data
+            data = owner._data
             if next(event.tags) ~= nil then
                 if event.tags.SourceType == "Potion" and event.tags.IsPositive then
                     event.amount = event.amount * mod.mult
-                    print("Алхимик " .. owner.Name .. " выпил зелье и сработало его мастерство!")
+                    print("Алхимик " .. data.Name .. " выпил зелье и сработало его мастерство!")
                 end
             end
         end,
         OnStatCalculate = function(mod, event, owner)
-            owner = owner._data
+            data = owner._data
             if next(event.tags) ~= nil then
                 if event.tags.SourceType == "Potion" and event.tags.IsPositive then
                     event.amount = event.amount * mod.mult
-                    print("Алхимик " .. owner.Name .. " выпил зелье и сработало его мастерство!")
+                    print("Алхимик " .. data.Name .. " выпил зелье и сработало его мастерство!")
                 end
             end
         end

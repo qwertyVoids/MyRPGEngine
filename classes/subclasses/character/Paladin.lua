@@ -13,12 +13,12 @@ function Paladin.new(name)
         name = "Shield",
         mult = 0.5,
         OnIncomingDamage = function(mod, event, owner)
-            owner = owner._data
+            data = owner._data
             if next(event.tags) ~= nil then
                 if type(event.amount) == "number" then
                     local oldAmount = event.amount
                     event.amount = event.amount * mod.mult
-                    print(owner.Name .. " поглотил " .. oldAmount - event.amount .. " единиц урона!")
+                    print(data.Name .. " поглотил " .. oldAmount - event.amount .. " единиц урона!")
                 end
             end
         end
