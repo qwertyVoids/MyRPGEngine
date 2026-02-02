@@ -1,3 +1,5 @@
+print("START!")
+
 function love.draw()
     local sw = love.graphics.getWidth()
     local sh = love.graphics.getHeight()
