@@ -74,7 +74,7 @@ function Character:TakeDamage(amount)
         table.insert(self._data.Modifiers, {
             name = "Death",
             OnIncomingDamage = function(mod, event, owner)
-                print("Игрок уже умер!")
+                print("The player is already dead!")
                 event.isBlocked = true
             end
         })
@@ -87,7 +87,7 @@ end
 
 function Character:CollectItem(item)
     if type(item) ~= "table" or not item.GetData then
-        print("Ошибка при использовании предмета: Укажите экземпляр класса Item.")
+        print("Error using item: Please provide an instance of the Item class.")
         return
     end
 
@@ -96,7 +96,7 @@ end
 
 function Character:DropItem(item)
     if type(item) ~= "table" or not item.GetData then
-        print("Ошибка при использовании предмета: Укажите экземпляр класса Item.")
+        print("Error using item: Please provide an instance of the Item class.")
         return
     end
 
@@ -105,7 +105,7 @@ end
 
 function Character:UseItem(slot)
     if type(slot) ~= "number" then
-        print("Ошибка при использовании предмета: Укажите номер слота.")
+        print("Error using item: Please enter slot number.")
         return
     end
 
